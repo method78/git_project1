@@ -1,17 +1,17 @@
 import sys
 from random import randint
+
 from PyQt6 import uic
-
 from PyQt6.QtGui import QPainter, QColor
-from PyQt6.QtWidgets import QWidget, QApplication, QMainWindow
+from PyQt6.QtWidgets import QWidget, QApplication, QPushButton, QMainWindow
 
 
-class MyWidget(QMainWindow):
-    def init(self):
-        super.__init__()
+class Example(QMainWindow):
+    def __init__(self):
+        super().__init__()
         uic.loadUi('UI.ui', self)
-        self.button.clicked.connect(self.paint)
         self.do_paint = False
+        self.button.clicked.connect(self.paint)
 
     def paintEvent(self, event):
         if self.do_paint:
@@ -25,14 +25,14 @@ class MyWidget(QMainWindow):
         self.do_paint = True
         self.update()
 
-    def draw_circle(self, qp):
+    def draw_flag(self, qp):
         qp.setBrush(QColor(255, 255, 0))
-        r = randint(10, 150)
-        qp.drawEllipse(300, r, r)
+        r = randint(50, 300)
+        qp.drawEllipse(100, 100, r, r)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MyWidget()
+    ex = Example()
     ex.show()
     sys.exit(app.exec())
